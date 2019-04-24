@@ -17,7 +17,6 @@ class MusicViewSet(viewsets.ModelViewSet):
     authentication_classes = (authentication.JWTAuthentication,)
     #parser_classes = (JSONParser,)
 
-
     # /api/music/{pk}/song_detail/
     @detail_route(methods=['get'])
     def song_detail(self, request, pk=None):
