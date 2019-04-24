@@ -1,0 +1,4 @@
+python==3.7.3
+Django==2.1.7
+djangorestframework==3.9.2
+django-rest-swagger==2.2.0
