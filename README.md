@@ -45,6 +45,9 @@ jwt接口使由三个部分组成：分別为 Header，Payload，Signature。所
 
 `pip install djangorestframework-jwt`
 
+我这里使用的是下面的这个jwt，我同时安装
+·pip install djangorestframework-simplejwt·
+
 ## jwt基本配置
 
 [Github博客，jwt配置](http://getblimp.github.io/django-rest-framework-jwt/)
