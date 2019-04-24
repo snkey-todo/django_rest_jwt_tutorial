@@ -16,27 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from musics.views import MusicViewSet
-# rest router
-from rest_framework.routers import DefaultRouter
+
 # swagger
 from rest_framework_swagger.views import get_swagger_view
-# jwt
-from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_jwt.views import refresh_jwt_token
-from rest_framework_jwt.views import verify_jwt_token
-
-router = DefaultRouter()
-router.register('music', MusicViewSet, base_name='music')
+# simple-jwt
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 schema_view = get_swagger_view(title='API')
 
 urlpatterns = [
     path('docs/', schema_view), # swagger API文档
     path('admin/', admin.site.urls),    # admin模块
-    path('api/', include(router.urls)), # 访问rest api
+    path('music/', include('musics.urls')),
+
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', obtain_jwt_token),
-    path('api-token-refresh/', refresh_jwt_token),
-    path('api-token-verify/', verify_jwt_token),
+
+    path('token-api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token-api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token-api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]

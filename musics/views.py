@@ -6,13 +6,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import detail_route, list_route
+# jwt
+from rest_framework_simplejwt import authentication
 
 # Create your views here.
 class MusicViewSet(viewsets.ModelViewSet):
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
-    permission_classes = (IsAuthenticated,)
-    parser_classes = (JSONParser,)
+    #permission_classes = (IsAuthenticated,)
+    authentication_classes = (authentication.JWTAuthentication,)
+    #parser_classes = (JSONParser,)
+
 
     # /api/music/{pk}/song_detail/
     @detail_route(methods=['get'])
